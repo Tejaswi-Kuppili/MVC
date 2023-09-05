@@ -1,0 +1,76 @@
+﻿@model AeroBook.Models.Account.User
+
+@{
+	ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+   /* body {
+        background-image: url('quizbg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }*/
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .login-box {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .aa-lost-password{
+        text-align:left;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+    }
+</style>
+
+<div class="container">
+    <div class="login-box">
+        <h2>Login</h2>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.Email, "Email")
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter your Email ID" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, "Password")
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Enter your Password" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+            <p class="aa-lost-password"><a href="#">Forgot Password?</a></p>
+            <button type="submit" class="btn btn-primary">Login</button>
+        }
+        <p>Don't have an account? <a href="@Url.Action("SignUp", "Home")">SignUp</a></p>
+    </div>
+</div>
